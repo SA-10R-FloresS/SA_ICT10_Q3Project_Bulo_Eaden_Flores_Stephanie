@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- META ATTRIBUTES -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- WEBSITE -->
+	<title>Player Roster - OBSA Games</title>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+
+	<!-- PYTHON -->
+	<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+	<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+	<!-- BS5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="particles"></div>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg fixed-top px-5 py-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.html">
+				<img src="butterfly-b.svg" id="butterflyImg"></img> <span class="ms-2">OBSA GAMES</span>
+			</a>
+			<button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapsibleNavbar" aria-controls="collapsibleNavbar"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="team.html">TEAM</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="players.html">PLAYERS</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="signup.html">SIGN-UP</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="glass-container animate__animated animate__fadeIn">
+		<div class="roster-card">
+			<div class="roster-header">
+				<div>
+					<div class="roster-title">🦋 PLAYER ROSTER</div>
+					<div class="roster-row-count" id="row-count">Loading…</div>
+				</div>
+				<div class="search-wrap">
+					<!-- I LOVE U CLAUDE (SEE PYTHON) -->
+					<span class="search-icon">🔍</span>
+					<input type="text" class="roster-search" id="search-input" placeholder="Search Players" py-input="search_players">
+				</div>
+			</div>
+
+			<!-- FILTERS BASED ON TEAM (SEE PYTHON) -->
+			<div class="filter-row">
+				<button class="f-btn act-all"  id="btn-all"    py-click="filter_all">All Players <span class="chevron">▼</span></button>
+				<button class="f-btn"          id="btn-green"  py-click="filter_green">🐝 Green Hornets <span class="chevron">▼</span></button>
+				<button class="f-btn"          id="btn-red"    py-click="filter_red">🐂 Red Bulldogs <span class="chevron">▼</span></button>
+				<button class="f-btn"          id="btn-yellow" py-click="filter_yellow">🐯 Yellow Tigers <span class="chevron">▼</span></button>
+				<button class="f-btn"          id="btn-blue"   py-click="filter_blue">🐻 Blue Bears <span class="chevron">▼</span></button>
+			</div>
+
+			<div class="roster-wrap">
+				<table class="roster-table">
+					<thead>
+						<tr>
+							<th>Player</th>
+							<th>Team</th>
+							<th>Section</th>
+						</tr>
+					</thead>
+					<tbody id="roster-body">
+						<tr class="table-empty"><td colspan="3">Loading players…</td></tr>
+					</tbody>
+				</table>
+			</div>		
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		const pc = document.getElementById('particles');
+		const cols = ['#EA4335','#FBBC04','#4285F4','#34A853'];
+		for (let i = 0; i < 32; i++) {
+			const p = document.createElement('div');
+			p.className = 'particle';
+			p.style.left = Math.random() * 100 + '%';
+			p.style.width = (2 + Math.random() * 3.5) + 'px';
+			p.style.height = p.style.width;
+			p.style.background = cols[Math.floor(Math.random() * cols.length)];
+			p.style.animationDuration = (10 + Math.random() * 16) + 's';
+			p.style.animationDelay = (Math.random() * 16) + 's';
+			pc.appendChild(p);
+		}
+	</script>
+	<py-script src="3.py"></py-script>
+</body>
+</html>
