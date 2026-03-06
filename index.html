@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- META ATTRIBUTES -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- WEBSITE -->
+	<title>Intramurals '26 - OBSA Games</title>
+	<link rel="icon" type="image/x-icon" href="favicon.png">
+
+	<!-- PYTHON -->
+	<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+	<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+	<!-- BS5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+	<link rel="stylesheet" href="styles.css">
+
+	<style>
+		/* STRUCTURE */
+		.wrapper {
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			padding: 100px 20px 40px;
+			z-index: 1;
+		}
+
+		.layout-main {
+			margin: 0 auto;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 32px;
+			max-width: 1400px;
+			width: 100%;
+		}
+
+		/* CAROUSEL */
+		.layout-carousel {
+			flex: 1;
+			min-width: 0;
+		}
+
+		#myCarousel {
+			height: 500px;
+			width: 100%;
+			border-radius: 16px;
+			overflow: hidden;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+		}
+
+		.carousel-inner, .carousel-item { 
+			height: 100%; 
+		}
+
+		.carousel-item img { 
+			height: 100%; 
+			width: 100%; 
+			object-fit: cover; 
+		}
+
+		.carousel-caption {
+			left: 5%;
+			right: auto;
+			bottom: 30px;
+			text-align: left;
+			
+			background: rgba(255, 255, 255, 0.2); 
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			
+			padding: 20px 30px;
+			border-radius: 20px;
+			max-width: 500px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+		}
+
+		.carousel-caption h3 { 
+			font-size: 1.8rem; 
+			font-weight: 800; 
+			color: #fff;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin-bottom: 5px;
+			text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+		}
+
+		.carousel-caption p { 
+			font-size: 1rem; 
+			color: #f8f9fa; 
+			margin-bottom: 0;
+			font-weight: 500;
+		}
+
+		/* GAME RESULTS */
+		.layout-scores {
+			height: 500px;
+			display: flex;
+			flex: 0 0 380px;
+			flex-direction: column;
+		}
+
+		.scores-title {
+			font-size: 1.4rem;
+			font-weight: 900;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			color: var(--yellow);
+		}
+
+		.scores-scroll-area {
+			overflow-y: auto;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			padding-right: 10px;
+		}
+
+		.score-card {
+			background: var(--white-bg);
+			border: 1px solid var(--card-border);
+			border-radius: 12px;
+			padding: 16px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+			transition: transform 0.2s ease;
+		}
+
+		.score-card:hover { 
+			transform: translateY(-3px); 
+		}
+
+		.sport-label {
+			font-size: 0.67rem;
+			font-weight: 700;
+			color: #888;
+			text-transform: uppercase;
+			letter-spacing: 1.25px;
+			border-bottom: 1px solid #f5f5f5;
+		}
+
+		.score-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.team-name { 
+			font-weight: 600; 
+			color: #444; 
+			font-size: 1rem !important; 
+		}
+
+		.score-num { 
+			font-weight: 800; 
+			font-size: 1.2rem; 
+		}
+
+		.score-num.lose { 
+			color: #bbbbbb; 
+		}
+
+		.tri {
+			display: inline-block;
+			font-size: 1rem;
+			opacity: 0;
+			transition: opacity 0.5s ease;
+			vertical-align: middle;
+			user-select: none;
+		}
+
+		.scores-scroll-area::-webkit-scrollbar { 
+			width: 4px; 
+		}
+		.scores-scroll-area::-webkit-scrollbar-track { 
+			background: transparent; 
+		}
+		.scores-scroll-area::-webkit-scrollbar-thumb { 
+			background: #e0e0e0; 
+			border-radius: 10px; 
+		}
+
+		/* RESPONSIVE */
+		@media (max-width: 992px) {
+			#butterflyImg { 
+				width: 10%; 
+			}
+
+			.layout-main { 
+				flex-direction: column; 
+			}
+
+			.layout-scores { 
+				width: 100%; 
+				flex: none; 
+				height: auto; 
+				max-height: 500px; 
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="particles"></div>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg fixed-top px-5 py-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.html">
+				<img src="butterfly-b.svg" id="butterflyImg"></img> <span class="ms-2">OBSA GAMES</span>
+			</a>
+			<button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapsibleNavbar" aria-controls="collapsibleNavbar"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="team.html">TEAM</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="players.html">PLAYERS</a>
+					</li>
+					<li class="nav-item mx-2">
+						<a class="nav-link" href="signup.html">SIGN-UP</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="wrapper animate__animated animate__fadeIn">
+		<div class="layout-main">
+			<!-- CAROUSEL -->
+			<div class="layout-carousel">
+				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner" style="height: 100%;">
+						<div class="carousel-item active" style="height: 100%;">
+							<img src="https://static01.nyt.com/images/2016/03/17/sports/18CURRY1/18CURRY1-superJumbo.jpg"
+								class="d-block w-100" alt="OBSA GAMES" style="height: 100%; width: 100%; object-fit: cover;">
+							<div class="carousel-caption d-block">
+								<h3>OBSA GAMES</h3>
+								<p>March 25-26, 2026—the most awaited event of the year.</p>
+							</div>
+						</div>
+						<div class="carousel-item" style="height: 100%;">
+							<img src="https://a.espncdn.com/photo/2020/0207/r662876_2_1296x729_16-9.jpg"
+								class="d-block w-100" alt="TEAM CHECKER" style="height: 100%; width: 100%; object-fit: cover;">
+							<div class="carousel-caption d-block">
+								<h3>TEAM CHECKER</h3>
+								<p>Which team are you cheering for this year?</p>
+							</div>
+						</div>
+						<div class="carousel-item" style="height: 100%;">
+							<img src="https://media.cnn.com/api/v1/images/stellar/prod/220616235221-09-2022-nba-finals-game-6.jpg?c=original"
+								class="d-block w-100" alt="PLAYERS" style="height: 100%; width: 100%; object-fit: cover;">
+							<div class="carousel-caption d-block">
+								<h3>PLAYERS</h3>
+								<p>Get a glimpse of this school year's roster!</p>
+							</div>
+						</div>
+					</div>
+
+					<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- ELIMS RESULTS -->
+			<div class="layout-scores">
+				<div class="scores-header mb-3">
+					<span class="scores-title">🏆 Game Results</span>
+				</div>
+
+				<div class="scores-scroll-area">
+					<div class="score-card">
+						<div class="sport-label pb-1 mb-2">🏀 Basketball</div>
+						<div class="score-row"><span class="team-name">🐂 Red Bulldogs</span> <span class="score-num lose">32</span><span class="tri">◀</span></div>
+						<div class="score-row"><span class="team-name">🐯 Yellow Tigers</span> <span class="score-num win">34</span><span class="tri">◀</span></div>
+					</div>
+
+					<div class="score-card">
+						<div class="sport-label pb-1 mb-2">🏐 Volleyball — Men's</div>
+						<div class="score-row"><span class="team-name">🐯 Yellow Tigers</span> <span class="score-num win">2</span><span class="tri">◀</span></div>
+						<div class="score-row"><span class="team-name">🐂 Red Bulldogs</span> <span class="score-num lose">0</span><span class="tri">◀</span></div>
+					</div>
+
+					<div class="score-card">
+						<div class="sport-label pb-1 mb-2">🏐 Volleyball — Women's</div>
+						<div class="score-row"><span class="team-name">🐝 Green Hornets</span> <span class="score-num lose">1</span><span class="tri">◀</span></div>
+						<div class="score-row"><span class="team-name">🐯 Yellow Tigers</span> <span class="score-num win">2</span><span class="tri">◀</span></div>
+					</div>
+
+					<div class="score-card">
+						<div class="sport-label pb-1 mb-2">🏐 Volleyball — Men's</div>
+						<div class="score-row"><span class="team-name">🐯 Yellow Tigers</span> <span class="score-num win">2</span><span class="tri">◀</span></div>
+						<div class="score-row"><span class="team-name">🐻 Blue Bears</span> <span class="score-num lose">1</span><span class="tri">◀</span></div>
+					</div>
+
+					<div class="score-card">
+						<div class="sport-label pb-1 mb-2">🏐 Volleyball — Women's</div>
+						<div class="score-row"><span class="team-name">🐂 Red Bulldogs</span> <span class="score-num lose">0</span><span class="tri">◀</span></div>
+						<div class="score-row"><span class="team-name">🐯 Yellow Tigers</span> <span class="score-num win">2</span><span class="tri">◀</span></div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		const pc = document.getElementById('particles');
+		const cols = ['#EA4335','#FBBC04','#4285F4','#34A853'];
+		for (let i = 0; i < 32; i++) {
+			const p = document.createElement('div');
+			p.className = 'particle';
+			p.style.left = Math.random() * 100 + '%';
+			p.style.width = (2 + Math.random() * 3.5) + 'px';
+			p.style.height = p.style.width;
+			p.style.background = cols[Math.floor(Math.random() * cols.length)];
+			p.style.animationDuration = (10 + Math.random() * 16) + 's';
+			p.style.animationDelay = (Math.random() * 16) + 's';
+			pc.appendChild(p);
+		}
+	</script>
+	<py-script src="1.py"></py-script>
+</body>
+</html>
