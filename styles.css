@@ -1,0 +1,668 @@
+/* FONTS & VARIABLES */
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap');
+
+:root {
+	/* GOOGLE COLORS */
+	--red: #EA4335;
+	--yellow: #FBBC04;
+	--blue: #4285F4;
+	--green: #34A853;
+	--white: #ffffff;
+	--card-border: #eeeeee;
+
+	/* SW AND ST */
+	--blue-light: #0a6ab8;
+	--blue-med: #024A85;
+	--blue-dark: #013362;
+	--blue-faint: rgba(2, 74, 133, 0.06);
+	--blue-glow: rgba(2, 74, 133, 0.18);
+	--border-strong: #B8CEDF;
+	--text: #0D1F30;
+	--text-secondary: #3A5168;
+	--muted: #7A92A8;
+
+	/* DETAILED GOOGLE COLORS */
+	--g-blue: #4285F4;
+	--g-blue-dark: #1a56c4;
+	--g-blue-faint: rgba(66, 133, 244, 0.1);
+	--g-red: #EA4335;
+	--g-red-dark: #b31412;
+	--g-red-faint: rgba(234, 67, 53, 0.1);
+	--g-green: #34A853;
+	--g-green-dark: #1e7e34;
+	--g-green-faint: rgba(52, 168, 83, 0.1);
+	--g-yellow-dark: #c47f00;
+	--g-yellow-faint: rgba(251, 188, 4, 0.15);
+	--g-grey-100: #f5f7fa;
+	--g-grey-600: #6b7a8d;
+	--g-grey-700: #4a5568;
+	--g-grey-800: #2d3748;
+	--g-grey-500: #9aa5b4;
+}
+
+/* BASE STYLES */
+body {
+	font-family: 'Catamaran';
+	margin: 0;
+	min-height: 100vh;
+	overflow-x: hidden;
+	background: 
+		linear-gradient(to bottom, var(--white) 70%, transparent 100%),
+		linear-gradient(to right, var(--red), var(--yellow), var(--green), var(--blue));
+	background-blend-mode: normal;
+}
+
+/* PARTICLES */
+#particles {
+	position: fixed;
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%;
+	z-index: 0;
+	pointer-events: none;
+	overflow: hidden;
+}
+
+.particle {
+	position: absolute;
+	top: -20px;
+	border-radius: 50%;
+	opacity: 0.6;
+	animation: fall linear infinite;
+}
+
+@keyframes fall {
+	0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+	100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* NAVBAR */
+.navbar {
+	background: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border-image: linear-gradient(to right, #EA4335, #FBBC04, #34A853, #4285F4) 1;
+	border-bottom: 6px solid;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+	z-index: 10;
+}
+
+#butterflyImg {
+	width: 40px;
+	height: auto;
+}
+
+.navbar .navbar-brand {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: var(--blue-med);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.navbar .nav-link {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #444 !important;
+	padding: 8px 15px;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+	transform: scale(1.05);
+}
+
+.navbar .nav-link:hover {
+	color: var(--blue-med);
+	background-color: rgba(2, 74, 133, 0.18);
+}
+
+/* --- START OF TEAM.HTML AND SIGNUP.HTML STYLES --- */
+
+.team-wrapper {
+	position: relative;
+	z-index: 1;
+	padding: 56px 0 90px;
+	min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intra-card {
+	background: var(--white);
+	border: 1px solid var(--card-border);
+	border-radius: 10px;
+	padding: 46px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 
+		0 4px 24px rgba(2, 74, 133, 0.08),
+		0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.intra-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 6px;
+	background: linear-gradient(90deg, var(--red), var(--yellow), var(--green), var(--blue));
+}
+
+.card-section-title {
+	font-family: 'Catamaran';
+	font-size: 1.75rem;
+	letter-spacing: 3px;
+	color: var(--blue-med);
+	margin-bottom: 28px;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+/* FORM */
+.field-label {
+	font-family: 'Catamaran';
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	color: var(--muted);
+	margin-bottom: 9px;
+}
+
+.intra-select {
+	background: var(--white);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	color: var(--text);
+	font-family: 'Catamaran';
+	font-size: 15px;
+	padding: 13px 16px;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.intra-select:focus {
+	border-color: var(--blue-med);
+	box-shadow: 0 0 0 3px rgba(2, 74, 133, 0.12);
+	color: var(--text);
+	background: var(--white);
+}
+
+.intra-select option {
+	background: var(--white);
+	color: var(--text);
+}
+
+.chk-item {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	cursor: pointer;
+	padding: 13px 16px;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	transition: all 0.2s;
+	user-select: none;
+	margin-bottom: 11px;
+	background: var(--white);
+}
+
+.chk-item:hover {
+	border-color: var(--blue-med);
+	background: var(--blue-faint);
+}
+
+.chk-item input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	accent-color: var(--blue-med);
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.chk-label {
+	font-size: 14px;
+	color: var(--text-secondary);
+}
+
+/* BUTTON */
+.btn-intra {
+	width: 100%;
+	padding: 16px;
+	font-family: 'Catamaran';
+	font-size: 23px;
+	letter-spacing: 5px;
+	color: var(--white);
+	background: var(--blue-med);
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.2s;
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-intra::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, var(--blue-light), var(--blue-dark));
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.btn-intra:hover::before {
+	opacity: 1;
+}
+
+.btn-intra:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 28px rgba(2, 74, 133, 0.35);
+}
+
+.btn-intra:active {
+	transform: translateY(0);
+}
+
+.btn-intra span {
+	position: relative;
+	z-index: 1;
+}
+
+/* RESULTS */
+.result-box {
+	border-radius: 5px;
+	padding: 28px;
+	animation: slideIn 0.35s ease;
+}
+
+@keyframes slideIn {
+	from { transform: translateY(14px); opacity: 0; }
+	to   { transform: translateY(0);    opacity: 1; }
+}
+
+.result-box.eligible {
+	background: rgba(0, 170, 90, 0.06);
+	border: 1px solid rgba(0, 170, 90, 0.3);
+}
+
+.result-box.ineligible {
+	background: rgba(200, 40, 40, 0.05);
+	border: 1px solid rgba(200, 40, 40, 0.25);
+}
+
+.result-status {
+	font-family: 'Catamaran';
+	font-size: 42px;
+	letter-spacing: 3px;
+	margin-bottom: 8px;
+}
+
+.ineligible .result-status { color: #C82828; }
+
+.team-badge {
+	margin-top: 22px;
+	padding: 18px 22px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	border: 1px solid;
+}
+
+.team-badge.green  { border-color: rgba(0, 200, 100, 0.5);  background: rgba(0, 200, 100, 0.25); }
+.team-badge.red    { border-color: rgba(255, 50, 50, 0.5);   background: rgba(255, 50, 50, 0.25); }
+.team-badge.yellow { border-color: rgba(255, 220, 0, 0.5);   background: rgba(255, 220, 0, 0.25); }
+.team-badge.blue   { border-color: rgba(50, 130, 255, 0.5);  background: rgba(50, 130, 255, 0.25); }
+
+.teamname {
+	font-family: 'Catamaran';
+	font-size: 30px;
+	letter-spacing: 2px;
+}
+
+.team-desc {
+	font-family: 'Catamaran';
+	font-size: 12px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--muted);
+	margin-top: 2px;
+}
+
+.team-info {
+	padding-top: 0;
+}
+
+@media (max-width: 576px) {
+	.team-badge {
+		flex-direction: column;
+		align-items: flex-start;
+		height: auto !important;
+	}
+
+	.team-info {
+		padding-top: 8px;
+	}
+}
+
+/* UPDATED STYLES... I GOT LAZY TO ORGANIZE IT HIGHKEY */
+.chk-layout {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+	width: 100%;
+}
+
+.chk-form-panel {
+	flex: 0 0 520px;
+	min-width: 0;
+}
+
+.chk-result-panel {
+	flex: 1 1 250px;
+	min-width: 250px;
+}
+
+.chk-result-panel:empty,
+.chk-result-panel #result:empty {
+	display: none;
+}
+
+.team-wrapper .container {
+	max-width: 1200px;
+}
+
+#result .result-box {
+	height: 100%;
+}
+
+#result .team-badge {
+	height: auto !important;
+	flex-direction: column;
+}
+
+#result .team-badge img {
+	max-width: 100%;
+	width: 100%;
+	object-fit: contain;
+}
+
+@media (max-width: 900px) {
+	.chk-layout {
+		flex-direction: column;
+	}
+
+	.chk-form-panel {
+		flex: none;
+		width: 100%;
+	}
+
+	.chk-result-panel {
+		width: 100%;
+	}
+}
+
+/* --- END OF TEAM.HTML AND SIGNUP.HTML STYLES --- */
+
+/* --- START OF PLAYERS.HTML STYLES --- */
+
+.glass-container {
+	max-width: 1000px;
+	margin: 120px auto 40px;
+	padding: 20px;
+	position: relative;
+	z-index: 1;
+}
+
+.roster-card {
+	background: rgba(255, 255, 255, 0.4);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 20px;
+	padding: 30px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.roster-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 6px;
+	background: linear-gradient(90deg, var(--red), var(--yellow), var(--green), var(--blue));
+}
+
+.roster-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 25px;
+}
+
+.roster-title {
+	font-family: 'Catamaran';
+	font-size: 2rem;
+	font-weight: 800;
+	letter-spacing: 2px;
+	color: var(--blue-med);
+	margin: 0;
+}
+
+.roster-row-count {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--muted);
+}
+
+/* SEARCH */
+.search-wrap {
+	position: relative;
+}
+
+.roster-search {
+	background: rgba(255, 255, 255, 0.6);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(5px);
+	border-radius: 12px;
+	padding: 10px 15px 10px 40px;
+	width: 250px;
+	font-family: 'Catamaran';
+	font-size: 14px;
+	color: var(--text);
+	transition: all 0.3s ease;
+}
+
+.roster-search:focus {
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 0 15px rgba(66, 133, 244, 0.2);
+	outline: none;
+}
+
+.roster-search::placeholder { color: var(--muted); }
+
+.search-icon {
+	position: absolute;
+	left: 11px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 13px;
+	color: var(--muted);
+	pointer-events: none;
+}
+
+/* FILTER BUTTONS */
+.filter-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	padding: 12px 0;
+	border-bottom: 1px solid var(--border);
+	margin-bottom: 20px;
+}
+
+.f-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 7px 14px;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.5);
+	font-family: 'Catamaran';
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--text);
+	cursor: pointer;
+	transition: all 0.15s;
+	white-space: nowrap;
+}
+
+.f-btn:hover {
+	transform: translateY(-2px);
+	background: rgba(255, 255, 255, 0.8);
+	border-color: var(--g-blue);
+	color: var(--g-blue);
+}
+
+.f-btn .chevron { font-size: 9px; margin-left: 2px; color: var(--muted); }
+
+.f-btn.act-all    { background: var(--g-grey-800);    color: var(--white); border-color: var(--g-grey-800); }
+.f-btn.act-green  { background: var(--g-green);       color: var(--white); border-color: var(--g-green); }
+.f-btn.act-red    { background: var(--g-red);         color: var(--white); border-color: var(--g-red); }
+.f-btn.act-yellow { background: var(--g-yellow-dark); color: var(--white); border-color: var(--g-yellow-dark); }
+.f-btn.act-blue   { background: var(--g-blue);        color: var(--white); border-color: var(--g-blue); }
+
+/* TABLE */
+.roster-wrap {
+	overflow-x: auto;
+}
+
+.roster-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.roster-table thead th {
+	padding: 10px 20px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--g-grey-600);
+	text-align: left;
+	background: var(--g-grey-100);
+	border-bottom: 1px solid var(--border);
+	white-space: nowrap;
+}
+
+.roster-table tbody tr {
+	border-bottom: 1px solid var(--g-grey-100);
+	transition: background 0.12s;
+	animation: rowIn 0.3s ease both;
+}
+
+.roster-table tbody tr:last-child { border-bottom: none; }
+.roster-table tbody tr:hover { background: #F8F9FF; }
+
+@keyframes rowIn {
+	from { opacity: 0; transform: translateX(-8px); }
+	to   { opacity: 1; transform: translateX(0); }
+}
+
+.roster-table tbody td {
+	padding: 14px 20px;
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--text);
+	vertical-align: middle;
+}
+
+/* PLAYER CELL */
+.td-player {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.p-avatar {
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--white);
+}
+
+.av-green  { background: var(--g-green); }
+.av-red    { background: var(--g-red); }
+.av-yellow { background: var(--g-yellow-dark); }
+.av-blue   { background: var(--g-blue); }
+
+.p-full-name {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.p-grade-sub {
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--muted);
+	margin-top: 1px;
+}
+
+/* PILLS */
+.team-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 4px 12px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	white-space: nowrap;
+}
+
+.tp-green  { background: var(--g-green-faint);  color: var(--g-green-dark); }
+.tp-red    { background: var(--g-red-faint);    color: var(--g-red-dark); }
+.tp-yellow { background: var(--g-yellow-faint); color: var(--g-yellow-dark); }
+.tp-blue   { background: var(--g-blue-faint);   color: var(--g-blue-dark); }
+
+.section-pill {
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	background: var(--g-grey-100);
+	color: var(--g-grey-700);
+	border: 1px solid var(--border);
+}
+
+.table-empty td {
+	text-align: center;
+	padding: 52px;
+	color: var(--muted);
+	font-size: 14px;
+	font-weight: 500;
+}
